@@ -79,7 +79,7 @@
         _preferences = [[SMFPreferences alloc] initWithPersistentDomainName:PreferencesDomain];		
 		[_preferences registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 										[NSArray array], PreferencesMachinesExcludedFromServerList,
-										@"Low", PreferencesQualitySetting,
+										@"Good", PreferencesQualitySetting,
 										@"Grid", PreferencesViewTypeSetting,
 										NO, PreferencesViewEnableSkipFilteringOptionsMenu,
 										NO, PreferencesViewDisablePosterZoomingInListView,
