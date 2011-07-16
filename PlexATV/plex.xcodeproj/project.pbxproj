@@ -127,6 +127,7 @@
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		40A2849613D236D100B1424C /* boot.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = boot.sh; sourceTree = "<group>"; };
 		66292F82138F60FA00479781 /* PlexMoreInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlexMoreInfoController.h; path = Classes/PlexMoreInfoController.h; sourceTree = "<group>"; };
 		66292F83138F60FA00479781 /* PlexMoreInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlexMoreInfoController.m; path = Classes/PlexMoreInfoController.m; sourceTree = "<group>"; };
 		66629E45130C854800EDC92D /* plex_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plex_Prefix.pch; sourceTree = "<group>"; };
@@ -242,6 +243,7 @@
 		089C166AFE841209C02AAC07 /* atvTwo */ = {
 			isa = PBXGroup;
 			children = (
+				40A2849613D236D100B1424C /* boot.sh */,
 				72827D3F131E110800F4007F /* control */,
 				875A8427126FFF6D00ECADC2 /* Makefile */,
 				875A8425126FFF6500ECADC2 /* build.sh */,
@@ -574,7 +576,7 @@
 		};
 		72B85E551331BD8B00FCD4AE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -583,7 +585,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export APP_NAME=\"Lowtide.app\"\nexport TARGET_DIR=/Applications/${APP_NAME}/Appliances/PLEX.frappliance\n\n#copy local (in order to build the .deb\ncp \"${BUILT_PRODUCTS_DIR}/plex.frappliance/plex\" \"${BUILD_DIR}/../_deb/PLEX.frapplication/Applications/${APP_NAME}/Appliances/PLEX.frappliance/\"\n\n\n#copy to the ATV\nscp \"${BUILT_PRODUCTS_DIR}/plex.frappliance/plex\" root@apple-tv.local:${TARGET_DIR}\nscp \"${PROJECT_DIR}/_deb/PLEX.frapplication/Applications/${APP_NAME}/Appliances/PLEX.frappliance/Info.plist\" root@apple-tv.local:${TARGET_DIR}\n\n#restart UI\nssh root@apple-tv.local 'killall AppleTV'\n#ssh root@apple-tv.local 'killall Lowtide'\n";
+			shellScript = "sh ${PROJECT_DIR}/boot.sh";
 		};
 		DD02DEB612FCACEC0019FBEE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -595,8 +597,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export APP_NAME=\"Lowtide.app\"\nexport TARGET_DIR=/Applications/${APP_NAME}/Appliances/PLEX.frappliance\n\n#copy local (in order to build the .deb\ncp \"${BUILT_PRODUCTS_DIR}/plex.frappliance/plex\" \"${BUILD_DIR}/../_deb/PLEX.frapplication/Applications/${APP_NAME}/Appliances/PLEX.frappliance/\"\n\n\n#copy to the ATV\nscp \"${BUILT_PRODUCTS_DIR}/plex.frappliance/plex\" root@apple-tv.local:${TARGET_DIR}\nscp \"${PROJECT_DIR}/_deb/PLEX.frapplication/Applications/${APP_NAME}/Appliances/PLEX.frappliance/Info.plist\" root@apple-tv.local:${TARGET_DIR}\n\n#restart UI\nssh root@apple-tv.local 'killall AppleTV'\n#ssh root@apple-tv.local 'killall Lowtide'\n";
+			shellPath = /bin/bash;
+			shellScript = "sh ${PROJECT_DIR}/boot.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
