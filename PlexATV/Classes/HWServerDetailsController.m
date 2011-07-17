@@ -11,6 +11,7 @@
 #import <plex-oss/PlexRequest.h>
 #import "HWUserDefaults.h"
 #import "Constants.h"
+#import "Localize.h"
 
 @implementation HWServerDetailsController
 
@@ -384,11 +385,11 @@
 #pragma mark -
 #pragma mark Dialog Boxes and Data Entry
 - (void)showEnterServerNameDialogBoxWithInitialText:(NSString *)initalText {
-    NSString *title = @"Server - Name";
-    NSString *secondaryInfoText = @"You may enter a custom server name to be associated with this new server";
+    NSString *title = localize(@"serverDetailsName");
+    NSString *secondaryInfoText = localize(@"serverDetailsHelp");
     NSString *deviceTitle = title;
     NSString *deviceSecondaryInfoText = secondaryInfoText;
-    NSString *textFieldLabel = @"Server name (optional)";
+    NSString *textFieldLabel = localize(@"serverDetailsFieldLabel");
     
     [self showDialogBoxWithTitle:title secondaryInfoText:secondaryInfoText deviceTitle:deviceTitle deviceSecondaryInfoText:deviceSecondaryInfoText textFieldLabel:textFieldLabel withInitialText:initalText usingSecureText:NO];
 }

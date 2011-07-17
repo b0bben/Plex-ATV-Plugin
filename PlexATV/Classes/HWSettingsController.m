@@ -20,6 +20,7 @@
 #import "PlexSecuritySettingsController.h"
 #import "HWUserDefaults.h"
 #import "Constants.h"
+#import "Localize.h"
 
 @implementation HWSettingsController
 @synthesize topLevelController;
@@ -51,7 +52,7 @@
 }
 
 - (NSString *)description {
-    return @"Plex Settings";
+    return localize(@"settingsHeader");
 }
 
 #pragma mark -
@@ -84,31 +85,31 @@
 	
 	// =========== servers ===========
 	SMFMenuItem *serversMenuItem = [SMFMenuItem folderMenuItem];
-	[serversMenuItem setTitle:@"Manage server list"];
+	[serversMenuItem setTitle:localize(@"settingsManageServers")];
 	[_items addObject:serversMenuItem];    
 	
     // =========== view settings ===========
 	SMFMenuItem *viewSettingsMenuItem = [SMFMenuItem folderMenuItem];
-	[viewSettingsMenuItem setTitle:@"View settings"];
+	[viewSettingsMenuItem setTitle:localize(@"settingsView")];
 	[_items addObject:viewSettingsMenuItem];
     
     
     // =========== playback settings ===========
 	SMFMenuItem *playbackSettingsMenuItem = [SMFMenuItem folderMenuItem];
-	[playbackSettingsMenuItem setTitle:@"Playback settings"];
+	[playbackSettingsMenuItem setTitle:localize(@"settingsPlayback")];
 	[_items addObject:playbackSettingsMenuItem];
     
     
     // =========== security settings ===========
 	SMFMenuItem *securitySettingsMenuItem = [SMFMenuItem folderMenuItem];
-	[securitySettingsMenuItem setTitle:@"Security settings"];
+	[securitySettingsMenuItem setTitle:localize(@"settingsSecurity")];
 	[_items addObject:securitySettingsMenuItem];
 	
     
 	// =========== version number ===========
 	SMFMenuItem *pluginVersionNumberMenuItem = [SMFMenuItem menuItem];
 	
-	[pluginVersionNumberMenuItem setTitle:@"Version"];
+	[pluginVersionNumberMenuItem setTitle:localize(@"settingsVersion")];
 	[pluginVersionNumberMenuItem setRightText:PlexPluginVersion];
     [_items addObject:pluginVersionNumberMenuItem];
 	

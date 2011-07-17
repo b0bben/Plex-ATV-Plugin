@@ -12,6 +12,7 @@
 #import <plex-oss/PlexRequest.h>
 #import "Constants.h"
 #import "HWServerDetailsController.h"
+#import "Localize.h"
 
 @implementation HWServersController
 
@@ -21,7 +22,7 @@
 #pragma mark Object/Class Lifecycle
 - (id) init {
 	if((self = [super init]) != nil) {		
-		[self setListTitle:@"All Servers"];
+		[self setListTitle:localize(@"serverListAllServers")];
 		BRImage *sp = [[BRThemeInfo sharedTheme] gearImage];
 		
 		[self setListIcon:sp horizontalOffset:0.0 kerningFactor:0.15];
@@ -35,7 +36,7 @@
         [secondSortDescriptor release];
 		
 		[[self list] setDatasource:self];
- 		[[self list] addDividerAtIndex:1 withLabel:@"List of Servers"];
+ 		[[self list] addDividerAtIndex:1 withLabel:localize(@"serverListListOfServers")];
 	}
 	return self;
 }
@@ -131,7 +132,7 @@
 	BRMenuItem * result = [[BRMenuItem alloc] init];
 	
 	if(row == 0){
-		[result setText:@"Add new server" withAttributes:[[BRThemeInfo sharedTheme] menuItemTextAttributes]];
+		[result setText:localize(@"serverListAdd") withAttributes:[[BRThemeInfo sharedTheme] menuItemTextAttributes]];
 		[result addAccessoryOfType:0];
 	} else {
 		Machine *m = [self.machines objectAtIndex:row-1];

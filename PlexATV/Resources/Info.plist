@@ -6,11 +6,6 @@
 	<string>0324</string>
 	<key>FRApplianceDataSourceType</key>
 	<string>All</string>
-	<key>UIDeviceFamily</key>
-	<array>
-		<integer>3</integer>
-		<integer>2</integer>
-	</array>
 	<key>CFBundleExecutable</key>
 	<string>HW</string>
 	<key>CFBundleIdentifier</key>
