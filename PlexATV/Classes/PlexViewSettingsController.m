@@ -16,6 +16,7 @@
 #import "PlexViewSettingsController.h"
 #import "HWUserDefaults.h"
 #import "Constants.h"
+#import "Localize.h"
 
 @implementation PlexViewSettingsController
 @synthesize viewTypesDescription;
@@ -85,7 +86,7 @@ typedef enum {
   	// =========== view type for movies setting ===========
 	SMFMenuItem *viewTypeForMoviesSettingMenuItem = [SMFMenuItem menuItem];
 	
-	[viewTypeForMoviesSettingMenuItem setTitle:@"View type for Movies"];
+	[viewTypeForMoviesSettingMenuItem setTitle:localize(@"viewTypeMovies")];
 	NSInteger viewTypeForMoviesSettingNumber = [[HWUserDefaults preferences] integerForKey:PreferencesViewTypeForMovies];
     NSString *viewTypeForMoviesSetting = [self.viewTypesDescription objectAtIndex:viewTypeForMoviesSettingNumber];
     [viewTypeForMoviesSettingMenuItem setRightText:viewTypeForMoviesSetting];
@@ -95,7 +96,7 @@ typedef enum {
     // =========== view type for tv shows setting ===========
 	SMFMenuItem *viewTypeForTvShowsSettingMenuItem = [SMFMenuItem menuItem];
 	
-	[viewTypeForTvShowsSettingMenuItem setTitle:@"View type for TV Shows"];
+	[viewTypeForTvShowsSettingMenuItem setTitle:localize(@"viewTypeTV")];
 	NSInteger viewTypeForTvShowsSettingNumber = [[HWUserDefaults preferences] integerForKey:PreferencesViewTypeForTvShows];
     NSString *viewTypeForTvShowsSetting = [self.viewTypesDescription objectAtIndex:viewTypeForTvShowsSettingNumber];
     [viewTypeForTvShowsSettingMenuItem setRightText:viewTypeForTvShowsSetting];

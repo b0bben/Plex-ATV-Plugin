@@ -8,6 +8,7 @@
 #import "Constants.h"
 #import "PlexNavigationController.h"
 #import "PlexTopShelfController.h"
+#import "Localize.h"
 
 #define SERVER_LIST_ID @"hwServerList"
 #define SETTINGS_ID @"hwSettings"
@@ -212,7 +213,7 @@ NSString * const CompoundIdentifierDelimiter = @"|||";
 
             if (i == [allDirectories count]) {
                 //add special search appliance
-                categoryName = @"Refresh";
+                categoryName = localize(@"mainMenuRefresh");
                 categoryPath = @"refresh";
             } else if (i == [allDirectories count]+1) {
                 //add special search appliance

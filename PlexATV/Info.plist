@@ -40,5 +40,10 @@
 	<string>3.0</string>
 	<key>NSPrincipalClass</key>
 	<string>PlexAppliance</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>sv</string>
+	</array>
 </dict>
 </plist>
