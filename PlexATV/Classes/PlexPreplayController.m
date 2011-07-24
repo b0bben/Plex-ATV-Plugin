@@ -409,7 +409,7 @@ typedef enum {
      [buttons addObject:b];
      */
     b = [BRButtonControl actionButtonWithImage:[[BRThemeInfo sharedTheme]queueActionImage] 
-                                      subtitle:@"Audio/subs" 
+                                      subtitle:@"Audio/Subs" 
                                          badge:nil];
     [b setIdentifier:[NSNumber numberWithInt:kAudioSubsButton]];
     [buttons addObject:b];
