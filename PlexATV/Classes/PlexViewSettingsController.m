@@ -134,6 +134,13 @@
 	NSString *fanart = [[HWUserDefaults preferences] boolForKey:PreferencesViewPreplayFanartEnabled] ? @"Enabled" : @"Disabled";
     [fanartMenuItem setRightText:fanart];
 	[_items addObject:fanartMenuItem];
+    
+    
+    SMFMenuItem *hiddenSummary = [SMFMenuItem menuItem];
+    [hiddenSummary setTitle:@"Hide summary on unseen media"];
+    NSString *summary = [[HWUserDefaults preferences] boolForKey:PreferencesViewHiddenSummary] ? @"Enabled" : @"Disabled";
+    [hiddenSummary setRightText:summary];
+    [_items addObject:hiddenSummary];
 }
 
 #pragma mark -

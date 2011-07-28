@@ -35,6 +35,8 @@
 #import <plex-oss/PlexMedia.h>
 #import "PlexMediaObject+Assets.h"
 #import "PlexPreviewAsset.h"
+#import "HWUserDefaults.h"
+#import "Constants.h"
 
 //these are in the AppleTV.framework, but cannot #import <AppleTV/AppleTV.h> due to
 //naming conflicts with Backrow.framework. below is a hack!
@@ -294,7 +296,15 @@ typedef enum {
 #if LOCAL_DEBUG_ENABLED
     DLog(@"summary: %@", [self.selectedMediaObject.previewAsset mediaSummary]);
 #endif
-    return [self.selectedMediaObject.previewAsset mediaSummary];
+
+    if ([[HWUserDefaults preferences] boolForKey:PreferencesViewHiddenSummary]) {
+        if ([self.selectedMediaObject.previewAsset.pmo seenState] != PlexMediaObjectSeenStateSeen) {
+            return @"*** HIDDEN TO PREVENT SPOILERS ***";
+        }
+    }
+    
+    return self.selectedMediaObject.previewAsset.mediaSummary;
+    
 }
 
 -(NSArray *)headers {

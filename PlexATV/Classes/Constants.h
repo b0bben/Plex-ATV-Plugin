@@ -11,6 +11,7 @@
 #define PreferencesViewThemeMusicLoopEnabled @"PreferencesViewThemeMusicLoopEnabled"
 #define PreferencesViewListPosterZoomingEnabled @"PreferencesViewListPosterZoomingEnabled"
 #define PreferencesViewPreplayFanartEnabled @"PreferencesViewPreplayFanartEnabled"
+#define PreferencesViewHiddenSummary @"PreferencesViewHiddenSummary"
 
 #define PreferencesPlaybackAudioAC3Enabled @"PreferencesPlaybackAudioAC3Enabled"
 #define PreferencesPlaybackAudioDTSEnabled @"PreferencesPlaybackAudioDTSEnabled"

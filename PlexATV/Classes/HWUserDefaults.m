@@ -162,6 +162,7 @@
             [NSNumber numberWithBool:NO], PreferencesViewThemeMusicLoopEnabled,
             [NSNumber numberWithBool:YES], PreferencesViewPreplayFanartEnabled,
             [NSNumber numberWithBool:YES], PreferencesViewListPosterZoomingEnabled,
+            [NSNumber nubmerWithBool:NO], PreferencesViewHiddenSummary,
             [NSNumber numberWithBool:NO], PreferencesPlaybackAudioAC3Enabled,
             [NSNumber numberWithBool:NO], PreferencesPlaybackAudioDTSEnabled,
             [NSNumber numberWithInt:8], PreferencesPlaybackVideoQualityProfile,
