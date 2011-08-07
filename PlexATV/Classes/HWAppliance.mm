@@ -185,12 +185,16 @@ NSString * const CompoundIdentifierDelimiter = @"|||";
 #if LOCAL_DEBUG_ENABLED
 			DLog(@"Machine [%@] is included in the server exclusion list, skipping", machineID);
 #endif
+            [machineID release];
+            [machineName release];
 			continue;
 		} else if (!machine.canConnect) {
 			//machine is not connectable
 #if LOCAL_DEBUG_ENABLED
 			DLog(@"Cannot connect to machine [%@], skipping", machine);
 #endif
+            [machineName release];
+            [machineID release];
 			continue;
 		}
 
@@ -280,6 +284,7 @@ NSString * const CompoundIdentifierDelimiter = @"|||";
 				}
 			}
 			[categoryName release];
+            [categoryPath release];
 		}
 		
 		[machineID release];

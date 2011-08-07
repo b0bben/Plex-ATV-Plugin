@@ -29,7 +29,7 @@
 #import <ambertation-plex/Ambertation.h>
 
 @implementation PlexSongAsset
-@synthesize pmo;
+@synthesize pmo, url;
 
 #pragma mark -
 #pragma mark Object/Class Lifecycle
@@ -39,10 +39,10 @@
 	if (self != nil) {
 		pmo = [o retain];
 
-    //TODO: Frank, why is this needed? it's nil otherwise
-    [pmo.mediaContainer retain]; 
-    
-		url = [u retain];
+        //TODO: Frank, why is this needed? it's nil otherwise
+        [pmo.mediaContainer retain]; 
+        
+		self.url = u;
 		DLog(@"PMO attrs: %@", pmo.attributes);
 		//PlexRequest *req = pmo.request;
 		//DLog(@"PMO request attrs: %@", req);

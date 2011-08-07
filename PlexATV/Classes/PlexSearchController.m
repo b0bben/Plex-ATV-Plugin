@@ -300,6 +300,7 @@
     //is freed after the search finished
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.currentSearchTerm, kSearchTermKey, searchRequest, kSearchRequestKey, nil];
     [self performSelectorInBackground:@selector(performSearch:) withObject:data];
+    [data release];
 }
 
 

@@ -32,6 +32,7 @@
 	PlexMediaObject* pmo;
 }
 @property (nonatomic, retain) PlexMediaObject* pmo;
+@property (nonatomic, retain) NSURL *url;
 
 - (id) initWithURL:(NSURL*)url mediaProvider:(id)mediaProvider mediaObject:(PlexMediaObject*)pmo;
 - (NSString*)mediaURL;

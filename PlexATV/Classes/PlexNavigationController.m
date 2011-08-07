@@ -39,11 +39,19 @@ PLEX_SYNTHESIZE_SINGLETON_FOR_CLASS(PlexNavigationController);
     if (self) {
         //this will allow us to have a nice 'wait spinner' when we
         //refactor the code so it can be loaded on a background thread
-        self.waitControl = [[BRWaitPromptControl alloc] init];
+        BRWaitPromptControl *ctrl = [BRWaitPromptControl new];
+        self.waitControl = ctrl;
+        [ctrl release];
+        
         [self.waitControl setFrame:[BRWindow interfaceFrame]];
         [self addControl:self.waitControl];
     }
     return self;
+}
+
+- (void)dealloc {
+    [waitControl release];
+    [super dealloc];
 }
 
 #pragma mark -

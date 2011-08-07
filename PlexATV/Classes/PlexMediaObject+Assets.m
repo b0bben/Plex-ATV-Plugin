@@ -116,7 +116,7 @@
 - (id)previewControl {
     id preview = nil;
     
-    preview = [[SMFMediaPreview alloc] init];
+    preview = [[[SMFMediaPreview alloc] init] autorelease];
 //    preview = [[BRMetadataPreviewControl alloc] init];
     [preview setShowsMetadataImmediately:![[HWUserDefaults preferences] boolForKey:PreferencesViewListPosterZoomingEnabled]];
     [preview setAsset:self.previewAsset];
