@@ -131,8 +131,8 @@
         [l setFrame:listFrame];
         
         //tab bar same width as list
-        [self.tabBar setFrame:CGRectMake(listFrame.origin.x+22.f, 567.f, 516.f, 25.f)];
-        
+
+        [self.tabBar setFrame:CGRectMake(listFrame.origin.x+36.f, 567.f, 516.f, 25.f)];
     }
 }
 

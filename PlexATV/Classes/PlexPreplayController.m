@@ -45,6 +45,7 @@
 - (id)hdPosterBadge;
 - (id)dolbyDigitalBadge;
 - (id)storeRentalPlaceholderImage;
+- (id)moreActionImage;
 @end
 
 typedef enum {
@@ -421,7 +422,7 @@ typedef enum {
     [buttons addObject:b];
     
     
-    b = [BRButtonControl actionButtonWithImage:[[BRThemeInfo sharedTheme]rateActionImage] 
+    b = [BRButtonControl actionButtonWithImage:[[BRThemeInfo sharedTheme]moreActionImage] 
                                       subtitle:@"More" 
                                          badge:nil];
     [b setIdentifier:[NSNumber numberWithInt:kMoreButton]];
