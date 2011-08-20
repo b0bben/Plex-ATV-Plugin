@@ -51,9 +51,9 @@
         action.value == 1 && 
         [self.delegate conformsToProtocol:@protocol(Plex_SMFMoviePreviewControllerDelegate)] &&
         [self.delegate respondsToSelector:@selector(controller:playButtonEventInShelf:)] &&
-        [c isKindOfClass:[BRMediaShelfControl class]]) {
+        [c isKindOfClass:[PlexMediaShelfView class]]) {
             
-        [self.delegate controller:self playButtonEventInShelf:(BRMediaShelfControl *)c];
+        [self.delegate controller:self playButtonEventInShelf:(PlexMediaShelfView *)c];
         return YES;
     }
     return [super brEventAction:action];

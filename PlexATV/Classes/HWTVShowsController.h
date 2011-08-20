@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Plex_SMFBookcaseController.h"
+#import "PlexMediaShelfView.h"
 
 @class PlexMediaContainer, PlexMediaObject;
 @interface HWTVShowsController : Plex_SMFBookcaseController <Plex_SMFBookcaseControllerDatasource, Plex_SMFBookcaseControllerDelegate> {

@@ -102,7 +102,7 @@ typedef enum {
         //set both focused and selected to the new index
 		currentSelectedIndex = newIndex;
         lastFocusedIndex = newIndex;
-		self._shelfControl.focusedIndex = newIndex;
+		ctrl.focusedIndexCompat = newIndex;
 		self.selectedMediaObject = [self.relatedMediaContainer.directories objectAtIndex:currentSelectedIndex];
         //move the shelf if needed to show the new item
         [self._shelfControl _scrollIndexToVisible:currentSelectedIndex];
@@ -230,7 +230,7 @@ typedef enum {
 	} else if (ctrl == self._shelfControl) {
         //user has selected a media item
 		[[SMFThemeInfo sharedTheme] playSelectSound];
-		[self changeMetadataViewToShowDataForIndex:self._shelfControl.focusedIndex];
+        [self changeMetadataViewToShowDataForIndex:ctrl.focusedIndexCompat];        
 	}
 }
 
@@ -243,7 +243,8 @@ typedef enum {
 	} else if (newControl == self._shelfControl) {
         //the shelf is now re-focused, load previous focused element
 		shelfIsSelected = YES;
-		self._shelfControl.focusedIndex = lastFocusedIndex;
+        PlexMediaShelfView *ctrl = self._shelfControl;
+		ctrl.focusedIndexCompat = lastFocusedIndex;
 	}
 }
 
@@ -263,7 +264,7 @@ typedef enum {
     [[PlexNavigationController sharedPlexNavigationController] initiatePlaybackOfMediaObject:self.selectedMediaObject];
 }
 
--(void)controller:(SMFMoviePreviewController *)c playButtonEventInShelf:(BRMediaShelfControl *)shelfControl {
+-(void)controller:(SMFMoviePreviewController *)c playButtonEventInShelf:(PlexMediaShelfView *)shelfControl {
     int selectedIndex = [shelfControl focusedIndex];
     PlexMediaObject *shelfSelectedMediaObject = [self.relatedMediaContainer.directories objectAtIndex:selectedIndex];
 #if LOCAL_DEBUG_ENABLED

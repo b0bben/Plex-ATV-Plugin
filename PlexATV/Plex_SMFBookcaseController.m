@@ -115,7 +115,7 @@
 		if (title) [dividerLine setLabel:title withAttributes:[[BRThemeInfo sharedTheme] boxTitleAttributesForRelated:NO]];
 		
 		//============================ SHELF ============================
-		BRMediaShelfControl *shelfControl = [[BRMediaShelfControl alloc] init];
+		PlexMediaShelfView *shelfControl = [[PlexMediaShelfView alloc] init];
 		[shelfControl setProvider:[self.datasource bookcaseController:self datastoreProviderForShelfAtIndex:i]];
 		CGRect shelfFrame = shelfControl.frame;
 		shelfFrame.size.height = 215.0f;
@@ -182,7 +182,7 @@
 
 - (void)refreshShelfAtIndex:(NSInteger)index {
 	if (index < [_shelfControls count] && index >= 0) {
-		BRMediaShelfControl *shelfControl = [_shelfControls objectAtIndex:index];
+		PlexMediaShelfView *shelfControl = [_shelfControls objectAtIndex:index];
 		[shelfControl reloadData];
 	}
 }
@@ -191,12 +191,12 @@
 	if ([[self stack] peekController] != self)
 		return [super brEventAction:action];
     
-    BRMediaShelfControl *newFocusedShelf = nil;
+    PlexMediaShelfView *newFocusedShelf = nil;
     int newFocusedShelfIndex = -1;
     id focusedBox = [_panelControl focusedControl];
     id currentFocusedControl = [focusedBox focusedControl];
-    if (currentFocusedControl && [currentFocusedControl isKindOfClass:[BRMediaShelfControl class]]) {
-        newFocusedShelf = (BRMediaShelfControl *)currentFocusedControl;
+    if (currentFocusedControl && [currentFocusedControl isKindOfClass:[PlexMediaShelfView class]]) {
+        newFocusedShelf = (PlexMediaShelfView *)currentFocusedControl;
         newFocusedShelfIndex = [_shelfControls indexOfObject:newFocusedShelf];
     }
     
@@ -222,7 +222,7 @@
 //private
 - (void)selectEventOccured {
 	if (self.delegate) {
-        BRMediaShelfControl *currentlyFocusedShelf = [_shelfControls objectAtIndex:focusedShelfIndex];
+        PlexMediaShelfView *currentlyFocusedShelf = [_shelfControls objectAtIndex:focusedShelfIndex];
 		if (currentlyFocusedShelf) {
 			if ([self.delegate bookcaseController:self allowSelectionForShelf:currentlyFocusedShelf atIndex:focusedShelfIndex]) {
 				if ([self.delegate respondsToSelector:@selector(bookcaseController:selectionWillOccurInShelf:atIndex:)]) {

@@ -28,6 +28,7 @@
 #import <plex-oss/PlexMediaObject.h>
 #import <plex-oss/PlexMediaStream.h>
 #import "Plex_SMFMoviePreviewController.h"
+#import "PlexMediaShelfView.h"
 
 @interface PlexPreplayController : Plex_SMFMoviePreviewController<Plex_SMFMoviePreviewControllerDatasource, Plex_SMFMoviePreviewControllerDelegate, SMFListDropShadowDatasource, SMFListDropShadowDelegate> {
 	BOOL shelfIsSelected;

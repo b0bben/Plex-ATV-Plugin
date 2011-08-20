@@ -6,6 +6,8 @@
 //
 
 #import <Backrow/Backrow.h>
+#import "PlexMediaShelfView.h"
+
 @class Plex_SMFBookcaseController;
 /**
  *Datasource protocol for the Plex_SMFBookcaseController
@@ -43,12 +45,12 @@
 @end
 
 @protocol Plex_SMFBookcaseControllerDelegate
--(BOOL)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController allowSelectionForShelf:(BRMediaShelfControl *)shelfControl atIndex:(NSInteger)index;
+-(BOOL)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController allowSelectionForShelf:(PlexMediaShelfView *)shelfControl atIndex:(NSInteger)index;
 @optional
--(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController selectionWillOccurInShelf:(BRMediaShelfControl *)shelfControl atIndex:(NSInteger)index;
--(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController selectionDidOccurInShelf:(BRMediaShelfControl *)shelfControl atIndex:(NSInteger)index;
--(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController shelf:(BRMediaShelfControl *)shelfControl noLongerFocusedAtIndex:(NSInteger)index;
--(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController shelf:(BRMediaShelfControl *)shelfControl focusedAtIndex:(NSInteger)index;
+-(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController selectionWillOccurInShelf:(PlexMediaShelfView *)shelfControl atIndex:(NSInteger)index;
+-(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController selectionDidOccurInShelf:(PlexMediaShelfView *)shelfControl atIndex:(NSInteger)index;
+-(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController shelf:(PlexMediaShelfView *)shelfControl noLongerFocusedAtIndex:(NSInteger)index;
+-(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController shelf:(PlexMediaShelfView *)shelfControl focusedAtIndex:(NSInteger)index;
 @end
 
 @interface Plex_SMFBookcaseController : BRController {
@@ -62,7 +64,7 @@
     
 	//delegate variables
     int focusedShelfIndex;
-    BRMediaShelfControl *focusedShelf;
+    PlexMediaShelfView *focusedShelf;
 	
 	//ui controls
 	NSMutableArray *_shelfControls;

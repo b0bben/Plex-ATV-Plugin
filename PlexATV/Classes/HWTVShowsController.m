@@ -47,7 +47,7 @@
         //if 4 or less, then this won't loop at all
         int startIndex = firstShelfToReload - 2; // -2 since we are wish to reload i+2
         for (int i = startIndex; i<shelfCount; i++) {
-            BRMediaShelfControl *shelf = [shelves objectAtIndex:i];
+            PlexMediaShelfView *shelf = [shelves objectAtIndex:i];
             if ([shelf isFocused]) {
                 if (i+2 == shelfCount) {
                     //last item, all prior ones will have been re-layout too. 
@@ -187,38 +187,38 @@
 
 #pragma mark -
 #pragma mark Plex_SMFBookcaseController Delegate Methods
--(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController shelf:(BRMediaShelfControl *)shelfControl noLongerFocusedAtIndex:(NSInteger)index {
+-(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController shelf:(PlexMediaShelfView *)shelfControl noLongerFocusedAtIndex:(NSInteger)index {
     PlexMediaObject *tvshow = [tvShows.directories objectAtIndex:index];
     [[PlexThemeMusicPlayer sharedPlexThemeMusicPlayer] stopPlayingThemeMusicForMediaObject:tvshow];
 }
 
--(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController shelf:(BRMediaShelfControl *)shelfControl focusedAtIndex:(NSInteger)index {
+-(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController shelf:(PlexMediaShelfView *)shelfControl focusedAtIndex:(NSInteger)index {
     PlexMediaObject *tvshow = [tvShows.directories objectAtIndex:index];
     [self.themeMusicTimer invalidate]; //cancel the old timer if it hasn't already fired
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:tvshow forKey:PlexMediaObjectTvShowKey];
     self.themeMusicTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(playThemeMusicForMediaObjectInTimer:) userInfo:userInfo repeats:NO];
 }
 
--(BOOL)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController allowSelectionForShelf:(BRMediaShelfControl *)shelfControl atIndex:(NSInteger)index {
+-(BOOL)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController allowSelectionForShelf:(PlexMediaShelfView *)shelfControl atIndex:(NSInteger)index {
     return YES;
 }
 
--(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController selectionWillOccurInShelf:(BRMediaShelfControl *)shelfControl atIndex:(NSInteger)index {
+-(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController selectionWillOccurInShelf:(PlexMediaShelfView *)shelfControl atIndex:(NSInteger)index {
 #if LOCAL_DEBUG_ENABLED
 	DLog(@"select will occur");
 #endif
 }
 
--(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController selectionDidOccurInShelf:(BRMediaShelfControl *)shelfControl atIndex:(NSInteger)index {
+-(void)bookcaseController:(Plex_SMFBookcaseController *)bookcaseController selectionDidOccurInShelf:(PlexMediaShelfView *)shelfControl atIndex:(NSInteger)index {
 #if LOCAL_DEBUG_ENABLED
-	DLog(@"select did occur at index: %d and shelfindex: %ld",index, [shelfControl focusedIndex]);	
+	DLog(@"select did occur at index: %d and shelfindex: %ld",index, [shelfControl focusedIndexCompat]);	
 #endif
     
     PlexMediaObject *tvshow = [tvShows.directories objectAtIndex:index];
     
     self.seasonsForSelectedTVShow = [tvshow contents];
     
-    PlexMediaObject *season = [self.seasonsForSelectedTVShow.directories objectAtIndex:[shelfControl focusedIndex]];
+    PlexMediaObject *season = [self.seasonsForSelectedTVShow.directories objectAtIndex:[shelfControl focusedIndexCompat]];
     
     if ([[season contents] hasOnlyEpisodes]) {
         [[PlexNavigationController sharedPlexNavigationController] navigateToObjectsContents:season];

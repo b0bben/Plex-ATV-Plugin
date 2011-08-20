@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Backrow/BRMediaShelfControl.h"
+#import "PlexMediaShelfView.h"
 
 @class PlexMediaContainer;
 
 @interface HWMediaGridController : BRController {
     BRGridControl*          _gridControl;
-    BRMediaShelfControl*    _shelfControl;
+    PlexMediaShelfView *    _shelfControl;
     BRWaitSpinnerControl *  _spinner;
     BRCursorControl *       _cursorControl;
     BRScrollControl *       _scroller;
