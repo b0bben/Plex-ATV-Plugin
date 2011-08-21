@@ -9,7 +9,7 @@
 #import "PlexMediaShelfView.h"
 
 @implementation PlexMediaShelfView
-@synthesize controller;
+@synthesize adapter;
 
 - (id)init {
     
@@ -28,14 +28,20 @@
     return nil;
 }
 
+- (void)dealloc {
+    [self.adapter release];
+    [super dealloc];
+}
+
 - (void)setProvider:(id)provider
 {
     if ([SMF_COMPAT usingFourPointFourPlus]) {
-        BRProviderDataSourceAdapter *adapter = [[NSClassFromString(@"BRProviderDataSourceAdapter") alloc] init];
-        [adapter setProviders:[NSArray arrayWithObjects:provider, nil]];
-        [self setDelegate:adapter];
-        [self setDataSource:adapter];
-        [adapter release];
+        DLog(@"Using 4.4 provider settings!");
+        BRProviderDataSourceAdapter *_adapter = [[NSClassFromString(@"BRProviderDataSourceAdapter") alloc] init];
+        [_adapter setProviders:[NSArray arrayWithObjects:provider, nil]];
+        [self setDelegate:_adapter];
+        [self setDataSource:_adapter];
+        self.adapter = adapter;
     } else {
         [(id)self setProvider:provider];
     }    
