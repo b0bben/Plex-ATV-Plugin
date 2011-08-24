@@ -81,8 +81,8 @@
 
 - (void)dealloc {
   DLog(@"releasing %@", self.rootContainer)
-	[self.songs release];
-	[self.rootContainer release];
+	[songs release];
+	[rootContainer release];
 	[super dealloc];
 }
 
@@ -110,7 +110,7 @@
 
 - (void)convertDirToSongAssets:(NSArray*)plexDirectories {
 	DLog(@"convertDirToSongAssets %@", plexDirectories);
-	self.songs = [[NSMutableArray alloc] initWithCapacity:5];
+    NSMutableArray *sArr = [[NSMutableArray alloc] initWithCapacity:5];
 	
 	for (int i=0; i < [rootContainer.directories count]; i++) {
 		PlexMediaObject *track = [rootContainer.directories objectAtIndex:i];
@@ -130,8 +130,11 @@
 		NSURL* mediaURL = [NSURL URLWithString:key];
 		PlexSongAsset *song = [[[PlexSongAsset alloc] initWithURL:mediaURL mediaProvider:nil mediaObject:track] autorelease];
 		
-		[self.songs addObject:song];
+		[sArr addObject:song];
 	}
+    
+    self.songs = sArr;
+    [sArr release];
 	
 }
 

@@ -296,6 +296,8 @@
         preview = [[[BRMediaParadeControl alloc] init] autorelease];
         [preview setImageProxies:imageProxies];
         
+        [data release];
+        
     } else {
 #if LOCAL_DEBUG_ENABLED
         DLog(@"using standard preview for [%@]", pmo);

@@ -39,7 +39,10 @@
 -(BRControl *)controlForImageProxy:(BRURLImageProxy *)imageProxy title:(NSString *)title {
         BRPosterControl *returnObj = [[BRPosterControl alloc] init];
         returnObj.posterStyle = 1;
-        returnObj.title = [[NSAttributedString alloc]initWithString:title attributes:[[BRThemeInfo sharedTheme] menuTitleSubtextAttributes]];
+        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:title 
+                                                                      attributes:[[BRThemeInfo sharedTheme] menuTitleSubtextAttributes]];
+        returnObj.title = attrStr;
+        [attrStr release]; /* we have given the reference to the returnObject which defines it as a retained property */
         returnObj.imageProxy=imageProxy;
         returnObj.defaultImage=self.defaultImage;
         returnObj.alwaysShowTitles=self._alwaysShowTitles;
