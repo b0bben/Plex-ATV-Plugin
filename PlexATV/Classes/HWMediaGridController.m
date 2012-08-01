@@ -13,6 +13,7 @@
 #import <plex-oss/PlexMediaContainer.h>
 #import "PlexControlFactory.h"
 #import "PlexNavigationController.h"
+#import "Localize.h"
 
 #define LOCAL_DEBUG_ENABLED 1
 #define MAX_RECENT_ITEMS 20
@@ -202,7 +203,7 @@ void checkNil(NSObject *ctrl)
 	div2.drawsLine = YES;
 	[div2 setStartOffsetText:0];
 	[div2 setAlignmentFactor:0.5f];
-    NSString *gridLabel = [NSString stringWithFormat:@"All %@", self.gridMediaContainer.name];
+    NSString *gridLabel = [NSString stringWithFormat:@"%@ %@", localize(@"mediaGridAll"), self.gridMediaContainer.name];
 	[div2 setLabel:gridLabel];
 	
 	CGRect dividerFrame = CGRectMake(0, boxFrame.size.height+10.f, 0, 0);

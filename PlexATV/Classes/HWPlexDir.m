@@ -89,16 +89,20 @@
 	[rootContainer release];
     [tabBar release];
     [items release];
-	
 	[super dealloc];
 }
-
 
 #pragma mark -
 #pragma mark Controller Lifecycle behaviour
 - (void)wasPushed {
-	[[MachineManager sharedMachineManager] setMachineStateMonitorPriority:NO];
-	[super wasPushed];
+    [[MachineManager sharedMachineManager] setMachineStateMonitorPriority:NO];
+    [super wasPushed];
+    
+    
+    BOOL jumpToSelected = [[HWUserDefaults preferences] boolForKey:PreferencesViewListJumpToUnseenEnabled];
+    if (jumpToSelected) {
+        [self selectFirstUnseen];
+    }
 }
 
 - (void)wasPopped {
@@ -401,6 +405,17 @@
 			[[[BRApplicationStackManager singleton] stack] popController];
 		}
 	}
+}
+
+- (void)selectFirstUnseen {
+    NSInteger i = 0;
+    for(PlexMediaObject *item in [self items]) {
+        if (item.seenState == PlexMediaObjectSeenStateUnseen || item.seenState == PlexMediaObjectSeenStateInProgress) {
+            [self setSelection:i];
+            break;
+        }
+        ++i;
+    }
 }
 
 @end

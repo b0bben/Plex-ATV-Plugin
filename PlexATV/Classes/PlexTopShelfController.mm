@@ -17,6 +17,7 @@
 #import <plex-oss/PlexRequest.h>
 #import "PlexMediaObject+Assets.h"
 #import "PlexNavigationController.h"
+#import "Localize.h"
 
 #pragma mark -
 #pragma mark BRTopShelfView Category
@@ -124,7 +125,7 @@
 
 -(id)mediaShelf:(BRMediaShelfView *)view titleForSectionAtIndex:(long)section {
     //PlexMediaContainer *aMediaContainer = section == 0 ? self.onDeckMediaContainer : self.recentlyAddedMediaContainer;
-    NSString *title = [NSString stringWithFormat:@"%@ : %@", self.containerName, section == 0 ? @"On Deck" : @"Recently Added"];
+    NSString *title = [NSString stringWithFormat:@"%@ : %@", self.containerName, section == 0 ? localize(@"topShelfOnDeck") : localize(@"topShelfRecentlyAdded")];
     
     BRTextControl *titleControl = [[BRTextControl alloc] init];
     

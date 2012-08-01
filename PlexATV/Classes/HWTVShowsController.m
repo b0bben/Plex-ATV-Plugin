@@ -12,6 +12,7 @@
 #import "PlexNavigationController.h"
 #import "PlexThemeMusicPlayer.h"
 #import "PlexControlFactory.h"
+#import "Localize.h"
 
 #define LOCAL_DEBUG_ENABLED 0
 
@@ -129,7 +130,7 @@
 #pragma mark -
 #pragma mark Plex_SMFBookcaseController Datasource Methods
 - (NSString *)headerTitleForBookcaseController:(Plex_SMFBookcaseController *)bookcaseController {
-	return @"TV Shows";
+	return localize(@"tvShowsHeader");
 }
 
 - (BRImage *)headerIconForBookcaseController:(Plex_SMFBookcaseController *)bookcaseController {

@@ -8,11 +8,12 @@
 #import "Constants.h"
 #import "PlexNavigationController.h"
 #import "PlexTopShelfController.h"
+#import "Localize.h"
 
 #define SERVER_LIST_ID @"hwServerList"
 #define SETTINGS_ID @"hwSettings"
-#define SERVER_LIST_CAT [BRApplianceCategory categoryWithName:NSLocalizedString(@"Server List", @"Server List") identifier:SERVER_LIST_ID preferredOrder:98]
-#define SETTINGS_CAT [BRApplianceCategory categoryWithName:NSLocalizedString(@"Settings", @"Settings") identifier:SETTINGS_ID preferredOrder:99]
+#define SERVER_LIST_CAT [BRApplianceCategory categoryWithName:localize(@"mainMenuServerList") identifier:SERVER_LIST_ID preferredOrder:98]
+#define SETTINGS_CAT [BRApplianceCategory categoryWithName:localize(@"mainMenuSettings") identifier:SETTINGS_ID preferredOrder:99]
 
 //dictionary keys
 NSString * const CategoryPathKey = @"PlexAppliancePath";
@@ -64,7 +65,7 @@ NSString * const CompoundIdentifierDelimiter = @"|||";
         }
         
         [self reloadCategories];
-	} 
+    } 
     return self;
 }
 
@@ -92,16 +93,16 @@ NSString * const CompoundIdentifierDelimiter = @"|||";
 		if (!machineWhoCategoryBelongsTo) return nil;
 		
 		// ====== find the category selected ======
-        if ([categoryName isEqualToString:@"Refresh"]) {
+        if ([categoryName isEqualToString:localize(@"mainMenuRefresh")]) {
             self.topShelfController.onDeckMediaContainer = nil;
             self.topShelfController.recentlyAddedMediaContainer = nil;
             [self.topShelfController refresh];
             [self rebuildCategories];
             
-        } else if ([categoryName isEqualToString:@"Search"]) {
+        } else if ([categoryName isEqualToString:localize(@"mainMenuSearch")]) {
             [navigationController navigateToSearchForMachine:machineWhoCategoryBelongsTo];
             
-        } else if ([categoryName isEqualToString:@"Channels"]) {
+        } else if ([categoryName isEqualToString:localize(@"mainMenuChannels")]) {
                 [navigationController navigateToChannelsForMachine:machineWhoCategoryBelongsTo];
             
         } else {
@@ -136,9 +137,9 @@ NSString * const CompoundIdentifierDelimiter = @"|||";
 	BRApplianceCategory *appliance;
 	for (int i = 0; i<[self.currentApplianceCategories count]; i++) {
 		appliance = [self.currentApplianceCategories objectAtIndex:i];
-        if ([appliance.name isEqualToString:@"Refresh"]) {
+        if ([appliance.name isEqualToString:localize(@"mainMenuRefresh")]) {
             [appliance setPreferredOrder:0];
-        } else if ([appliance.name isEqualToString:@"Search"]) {
+        } else if ([appliance.name isEqualToString:localize(@"mainMenuSearch")]) {
             [appliance setPreferredOrder:1];
         } else {
             [appliance setPreferredOrder:i+2]; //+2 so we reserve 0 for refresh and 1 for search
@@ -216,15 +217,15 @@ NSString * const CompoundIdentifierDelimiter = @"|||";
 
             if (i == [allDirectories count]) {
                 //add special search appliance
-                categoryName = @"Refresh";
+                categoryName = localize(@"mainMenuRefresh");
                 categoryPath = @"refresh";
             } else if (i == [allDirectories count]+1) {
                 //add special search appliance
-                categoryName = @"Search";
+                categoryName = localize(@"mainMenuSearch");
                 categoryPath = @"search";
             } else if (i == [allDirectories count]+2) {
                 //add special channels appliance
-                categoryName = @"Channels";
+                categoryName = localize(@"mainMenuChannels");
                 categoryPath = @"channels";
             } else {
                 //add all others

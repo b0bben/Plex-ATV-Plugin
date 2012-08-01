@@ -16,19 +16,23 @@
 #import "PlexViewSettingsController.h"
 #import "HWUserDefaults.h"
 #import "Constants.h"
+#import "Localize.h"
 
 @implementation PlexViewSettingsController
 @synthesize viewTypesDescription;
 
-//----------- general -----------
-#define ViewTypeForMoviesIndex              0
-#define ViewTypeForTvShowsIndex             1
-#define ViewThemeMusicEnabledIndex          2
-#define ViewThemeMusicLoopEnabledIndex      3
-//----------- list -----------
-#define ViewListPosterZoomingEnabledIndex   4
-//----------- detailed metadata -----------
-#define ViewPreplayFanartEnabledIndex       5
+typedef enum {
+    // General
+    ViewTypeForMoviesIndex,
+    ViewTypeForTvShowsIndex,          
+    ViewThemeMusicEnabledIndex,
+    ViewThemeMusicLoopEnabledIndex,
+    // List
+    ViewListPosterZoomingEnabledIndex,
+    ViewListJumpToUnseenIndex,
+    // Detailed Metadata -----------
+    ViewPreplayFanartEnabledIndex
+} ViewType;
 
 #pragma mark -
 #pragma mark Object/Class Lifecycle
@@ -40,9 +44,9 @@
         self.viewTypesDescription = [NSArray arrayWithObjects:@"List", @"Grid", @"Bookcase", nil];
         
 		[self setupList];
-        [[self list] addDividerAtIndex:0 withLabel:@"General"];
-        [[self list] addDividerAtIndex:4 withLabel:@"List"];
-        [[self list] addDividerAtIndex:5 withLabel:@"Preplay"];
+        [[self list] addDividerAtIndex:ViewTypeForMoviesIndex withLabel:@"General"];
+        [[self list] addDividerAtIndex:ViewListPosterZoomingEnabledIndex withLabel:@"List"];
+        [[self list] addDividerAtIndex:ViewPreplayFanartEnabledIndex withLabel:@"Preplay"];
 	}	
 	return self;
 }
@@ -82,7 +86,7 @@
   	// =========== view type for movies setting ===========
 	SMFMenuItem *viewTypeForMoviesSettingMenuItem = [SMFMenuItem menuItem];
 	
-	[viewTypeForMoviesSettingMenuItem setTitle:@"View type for Movies"];
+	[viewTypeForMoviesSettingMenuItem setTitle:localize(@"viewTypeMovies")];
 	NSInteger viewTypeForMoviesSettingNumber = [[HWUserDefaults preferences] integerForKey:PreferencesViewTypeForMovies];
     NSString *viewTypeForMoviesSetting = [self.viewTypesDescription objectAtIndex:viewTypeForMoviesSettingNumber];
     [viewTypeForMoviesSettingMenuItem setRightText:viewTypeForMoviesSetting];
@@ -92,7 +96,7 @@
     // =========== view type for tv shows setting ===========
 	SMFMenuItem *viewTypeForTvShowsSettingMenuItem = [SMFMenuItem menuItem];
 	
-	[viewTypeForTvShowsSettingMenuItem setTitle:@"View type for TV Shows"];
+	[viewTypeForTvShowsSettingMenuItem setTitle:localize(@"viewTypeTV")];
 	NSInteger viewTypeForTvShowsSettingNumber = [[HWUserDefaults preferences] integerForKey:PreferencesViewTypeForTvShows];
     NSString *viewTypeForTvShowsSetting = [self.viewTypesDescription objectAtIndex:viewTypeForTvShowsSettingNumber];
     [viewTypeForTvShowsSettingMenuItem setRightText:viewTypeForTvShowsSetting];
@@ -124,8 +128,15 @@
 	NSString *posterZoom = [[HWUserDefaults preferences] boolForKey:PreferencesViewListPosterZoomingEnabled] ? @"Enabled" : @"Disabled";
     [posterZoomMenuItem setRightText:posterZoom];
 	[_items addObject:posterZoomMenuItem];
-    
-    
+
+    // =========== jump to unseen ===========
+    SMFMenuItem *jumpToUnseenMenuItem = [SMFMenuItem menuItem];
+
+    [jumpToUnseenMenuItem setTitle:@"Jump to unseen"];
+    NSString *jumpToUnseen = [[HWUserDefaults preferences] boolForKey:PreferencesViewListJumpToUnseenEnabled] ? @"Enabled" : @"Disabled";
+    [jumpToUnseenMenuItem setRightText:jumpToUnseen];
+    [_items addObject:jumpToUnseenMenuItem];
+
     // =========== Preplay ===========
     // =========== fanart ===========
 	SMFMenuItem *fanartMenuItem = [SMFMenuItem menuItem];
@@ -186,6 +197,13 @@
 			[self.list reload];
 			break;
         }
+		case ViewListJumpToUnseenIndex: {
+			BOOL isTurnedOn = [[HWUserDefaults preferences] boolForKey:PreferencesViewListJumpToUnseenEnabled];
+			[[HWUserDefaults preferences] setBool:!isTurnedOn forKey:PreferencesViewListJumpToUnseenEnabled];
+			[self setupList];
+			[self.list reload];
+			break;
+        }
         //--------------------- seperator ---------------------
 		case ViewPreplayFanartEnabledIndex: {
 			BOOL isTurnedOn = [[HWUserDefaults preferences] boolForKey:PreferencesViewPreplayFanartEnabled];
@@ -226,6 +244,11 @@
 		case ViewListPosterZoomingEnabledIndex: {
 			[asset setTitle:@"Toggles whether to zoom the poster"];
 			[asset setSummary:@"Enables/Disables the image starting out full screen and animating to show the metadata"];
+			break;
+		}
+		case ViewListJumpToUnseenIndex: {
+			[asset setTitle:@"Toggles whether to jump to the first unseen item when opening a list view"];
+			[asset setSummary:@"Enables/Disables whether the selection should jump to the first unseen show/movie in a list"];
 			break;
 		}
 		case ViewPreplayFanartEnabledIndex: {

@@ -15,6 +15,7 @@
 #import <plex-oss/Machine.h>
 #import "PlexNavigationController.h"
 #import "PlexMediaObject+Assets.h"
+#import "Localize.h"
 
 @implementation PlexSearchController
 @synthesize totalResults, textEntry, previewContainer, currentSearchTerm, items;
@@ -30,7 +31,7 @@
         self.items = nil;
         [self.list setDatasource:self];
         
-        [self setListTitle:@"Search"];
+        [self setListTitle:localize(@"searchScreenTitle")];
 		NSString *plexIcon = [[NSBundle bundleForClass:[self class]] pathForResource:@"PlexIcon" ofType:@"png"];
 		BRImage *listIcon = [BRImage imageWithPath:plexIcon];
 		[self setListIcon:listIcon horizontalOffset:0.0 kerningFactor:0.15];
